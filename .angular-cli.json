@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "tt"
+    "name": "time-tracker"
   },
   "apps": [
     {
@@ -9,6 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
+        "manifest.json",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -24,7 +25,7 @@
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
-        "dev": "environments/environment.ts",
+        "dev": "environments/environment.dev.ts",
         "prod": "environments/environment.prod.ts"
       },
       "serviceWorker": true

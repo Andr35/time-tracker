@@ -1,0 +1,17 @@
+<ng-container *ngIf="days$ | async; let days">
+
+  <div *ngIf="days.length === 0" fxLayout="column" fxFlex="auto" fxLayoutAlign="center center">
+    <span class="mat-title">Nothing to see here 🙄</span>
+  </div>
+
+  <mat-list *ngFor="let items of days | monthGroup; let last = last" fxFlex="auto">
+
+    <h3 matSubheader>{{items[0].startDate | date:'MMMM yyyy'}}</h3>
+
+    <app-day-details *ngFor="let day of items" [day]="day" (removeDay)="onRemoveDay($event)"></app-day-details>
+
+    <mat-divider *ngIf="!last"></mat-divider>
+
+  </mat-list>
+
+</ng-container>

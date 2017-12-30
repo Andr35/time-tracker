@@ -1,0 +1,40 @@
+$svg-size: 32px;
+mat-expansion-panel {
+    margin: 12px;
+}
+
+mat-action-row {
+    padding: 6px;
+}
+
+.text-bolder {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+svg {
+    width: $svg-size;
+    height: $svg-size;
+}
+
+.draw-pipe {
+    fill: #E0E0E0;
+}
+
+.point-start {
+    fill: #8BC34A;
+    stroke-width: 2px;
+    stroke: lighten(#8BC34A, 12%);
+}
+
+.point-pause {
+    fill: #FFC107;
+    stroke-width: 2px;
+    stroke: lighten(#FFC107, 12%);
+}
+
+.point-stop {
+    fill: #F44336;
+    stroke-width: 2px;
+    stroke: lighten(#F44336, 12%);
+}
