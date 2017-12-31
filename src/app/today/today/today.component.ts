@@ -1,5 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {Store} from '@ngrx/store';
+import {style, trigger, state, transition, animate} from '@angular/animations';
 import {AppState} from '../../store/app.state';
 import {Subscription} from 'rxjs/Subscription';
 import {selectAllData} from '../../store/data/data.state';
@@ -11,7 +12,14 @@ import {map} from 'rxjs/operators/map';
   selector: 'app-today',
   templateUrl: './today.component.html',
   styleUrls: ['./today.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('enterLeave', [
+      state('in', style({opacity: 1})),
+      transition('void => *', [style({opacity: 0}), animate(300)]),
+      transition('* => void', [animate(300, style({opacity: 0}))])
+    ])
+  ]
 })
 export class TodayComponent implements OnInit, OnDestroy {
 

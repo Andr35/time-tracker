@@ -86,12 +86,17 @@
 
   </div>
 
-  <div class="actions" fxLayout fxLayoutAlign="center center">
-    <button mat-raised-button color="accent" (click)="onStop()">Stop 🏁</button>
 
-    <button mat-mini-fab color="warn" (click)="toggleRecPause()" fxFlexOffset="24px">
-      <mat-icon *ngIf="!recPauseDate">pause</mat-icon>
-      <mat-icon *ngIf="recPauseDate">stop</mat-icon>
+  <div class="actions" fxLayout fxLayoutAlign="center center">
+
+    <button mat-mini-fab *ngIf="!recPauseDate" color="warn" (click)="toggleRecPause()" [@enterLeave]="'in'">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+
+    <button mat-raised-button color="accent" (click)="onStop()" fxFlexOffset="24px">Stop 🏁</button>
+
+    <button mat-mini-fab *ngIf="recPauseDate" color="warn" (click)="toggleRecPause()" fxFlexOffset="24px" [@enterLeave]="'in'">
+      <mat-icon>stop</mat-icon>
     </button>
   </div>
 
