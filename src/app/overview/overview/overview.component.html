@@ -1,4 +1,4 @@
-<ng-container *ngIf="days$ | async; let days">
+<ng-container *ngIf="days$ | async as days">
 
   <div *ngIf="days.length === 0" fxLayout="column" fxFlex="auto" fxLayoutAlign="center center">
     <span class="mat-title">Nothing to see here 🙄</span>
