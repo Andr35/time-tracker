@@ -4,7 +4,7 @@
     <span class="mat-title">Nothing to see here 🙄</span>
   </div>
 
-  <mat-list *ngFor="let items of days | monthGroup; let last = last" fxFlex="auto">
+  <mat-list *ngFor="let items of days | monthGroup; let last = last" fxFlex="auto" fxLayout="column">
 
     <h3 matSubheader>{{items[0].startDate | date:'MMMM yyyy'}}</h3>
 
