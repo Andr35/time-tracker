@@ -1,16 +1,13 @@
 {
-  "dir": "ltr",
   "lang": "en",
   "scope": "/",
+  "start_url": "https://time-tracker-4a2ad.firebaseapp.com/",
   "name": "Time Tracker",
   "display": "standalone",
   "short_name": "Time Tracker",
   "description": "Time tracker",
   "theme_color": "#1976D2",
   "background_color": "#1976D2",
-  "orientation": "any",
-  "related_applications": [],
-  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/favicon.ico",

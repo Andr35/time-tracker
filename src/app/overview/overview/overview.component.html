@@ -4,13 +4,18 @@
     <span class="mat-title">Nothing to see here 🙄</span>
   </div>
 
-  <mat-list *ngFor="let items of days | monthGroup; let last = last" fxFlex="auto" fxLayout="column">
+  <mat-list fxFlex="auto">
 
-    <h3 matSubheader>{{items[0].startDate | date:'MMMM yyyy'}}</h3>
+    <ng-container *ngFor="let items of days | monthGroup; let last = last">
 
-    <app-day-details *ngFor="let day of items" [day]="day" (removeDay)="onRemoveDay($event)"></app-day-details>
 
-    <mat-divider *ngIf="!last"></mat-divider>
+      <h3 matSubheader>{{items[0].startDate | date:'MMMM yyyy'}}</h3>
+
+      <app-day-details *ngFor="let day of items" [day]="day" (removeDay)="onRemoveDay($event)"></app-day-details>
+
+      <mat-divider *ngIf="!last"></mat-divider>
+
+    </ng-container>
 
   </mat-list>
 
