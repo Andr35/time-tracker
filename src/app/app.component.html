@@ -3,7 +3,7 @@
   <router-outlet></router-outlet>
 
   <nav mat-tab-nav-bar>
-    <a mat-tab-link *ngFor="let tab of TABS" [routerLink]="tab.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"
+    <a mat-tab-link *ngFor="let tab of TABS" [routerLink]="tab.link" [attr.aria-label]="tab.label" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive"
       fxFlex="auto">
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon [color]="rla.isActive ? 'primary': ''">{{tab.icon}}</mat-icon>
