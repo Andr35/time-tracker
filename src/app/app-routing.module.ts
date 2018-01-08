@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {AuthGuard} from './auth.guard';
 import {TodayComponent} from './today/today/today.component';
 import {OverviewComponent} from './overview/overview/overview.component';
 import {SettingsComponent} from './settings/settings/settings.component';
 import {AuthComponent} from './auth/auth/auth.component';
-import {AuthGuard} from './auth.guard';
+import {StatsComponent} from './stats/stats/stats.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'overview',
     component: OverviewComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'stats',
+    component: StatsComponent,
     canActivate: [AuthGuard]
   },
   {

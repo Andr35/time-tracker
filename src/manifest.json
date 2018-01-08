@@ -1,7 +1,7 @@
 {
   "lang": "en",
   "scope": "/",
-  "start_url": "https://time-tracker-4a2ad.firebaseapp.com/",
+  "start_url": "/",
   "name": "Time Tracker",
   "display": "standalone",
   "short_name": "Time Tracker",

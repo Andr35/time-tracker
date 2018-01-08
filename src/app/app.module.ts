@@ -16,6 +16,7 @@ import {AppComponent} from './app.component';
 import {environment} from '../environments/environment';
 import {TodayModule} from './today/today.module';
 import {OverviewModule} from './overview/overview.module';
+import {StatsModule} from './stats/stats.module';
 import {SettingsModule} from './settings/settings.module';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule} from 'angularfire2/auth';
@@ -58,6 +59,7 @@ export class RavenErrorHandler implements ErrorHandler {
 
     TodayModule,
     OverviewModule,
+    StatsModule,
     SettingsModule,
     AuthModule,
 

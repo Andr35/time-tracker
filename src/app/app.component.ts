@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
     this.TABS = [
       {label: 'Today', link: 'today', icon: 'today'},
       {label: 'Overview', link: 'overview', icon: 'update'},
-      {label: 'Settings', link: 'settings', icon: 'settings'}
+      {label: 'Stats', link: 'stats', icon: 'insert_chart'},
+      {label: 'Settings', link: 'settings', icon: 'settings'},
     ];
   }
 

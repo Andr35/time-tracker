@@ -1,0 +1,38 @@
+<div fxLayout="column" fxFlex="auto">
+
+  <div fxLayout fxLayoutAlign="space-around " class="date-choose-box">
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="startPicker" placeholder="Start date" [(ngModel)]="startDate" (dateChange)="onDateChange($event)">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="endPicker" placeholder="End date" [(ngModel)]="endDate" (dateChange)="onDateChange($event)">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+  </div>
+
+  <div fxLayout="column" class="chart-box" fxFlex="auto">
+
+    <div>
+      <mat-list>
+        <mat-list-item>
+          <h4 matLine>Avg hours per day</h4>
+          <span class="mat-body" color="primary">{{avgHours | date:'HH:mm':'+0'}}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div fxLayout="column" fxFlex="auto">
+      <span class="mat-title">Stats</span>
+      <canvas #statchart></canvas>
+    </div>
+
+  </div>
+
+
+</div>

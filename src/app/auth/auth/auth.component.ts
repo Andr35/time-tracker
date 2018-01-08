@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Subscription} from 'rxjs/Subscription';
 import {filter} from 'rxjs/operators/filter';
+import {AuthGuard} from '../../auth.guard';
 
 import * as firebase from 'firebase/app';
 
@@ -20,7 +21,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscr = this.afAuth.authState.pipe(filter(user => !!user)).subscribe(user => {
-      this.router.navigate(['/']);
+      this.router.navigateByUrl(AuthGuard.lastRoute);
     });
   }
 
