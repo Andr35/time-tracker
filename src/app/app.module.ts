@@ -14,9 +14,11 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {AppComponent} from './app.component';
 
 import {environment} from '../environments/environment';
+
 import {TodayModule} from './today/today.module';
 import {OverviewModule} from './overview/overview.module';
 import {StatsModule} from './stats/stats.module';
+import {EditModule} from './edit/edit.module';
 import {SettingsModule} from './settings/settings.module';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule} from 'angularfire2/auth';
@@ -42,9 +44,6 @@ export class RavenErrorHandler implements ErrorHandler {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -62,11 +61,15 @@ export class RavenErrorHandler implements ErrorHandler {
     StatsModule,
     SettingsModule,
     AuthModule,
+    EditModule,
 
     // Style
     FlexLayoutModule,
     MatTabsModule,
     MatIconModule
+  ],
+  declarations: [
+    AppComponent
   ],
   providers: [
     AuthGuard,

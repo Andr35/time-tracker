@@ -1,0 +1,46 @@
+<div fxLayout="column" fxFlex="auto">
+
+  <div fxLayout="row">
+    <button mat-icon-button (click)="onCancel()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <span fxFlex="auto" class="mat-title title">{{day?.startDate | date:'dd MMMM yyyy'}}</span>
+
+    <button mat-icon-button color="warn" (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+
+  <div fxFlex="auto" fxLayout="column">
+
+    <span class="mat-subheading-1 tag-subheader">Pauses</span>
+
+    <app-pauses-box [day]="day" (addPause)="onAddPause($event)" (removePause)="onRemovePause($event)">
+    </app-pauses-box>
+
+  </div>
+
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="36px">
+    <span class="mat-subheading-1 tag-subheader">Stop time</span>
+    <span class="mat-title">{{ day?.stopDate | date:'HH:mm' }}</span>
+  </div>
+
+</div>
+
+
+<div fxLayout="row" fxLayoutAlign="center center">
+
+  <button mat-fab color="warn" (click)="onCancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <button mat-fab color="primary" (click)="onConfirm()" fxFlexOffset="24px">
+    <mat-icon>check</mat-icon>
+  </button>
+
+</div>
+
+</div>

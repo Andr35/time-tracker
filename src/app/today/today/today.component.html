@@ -59,32 +59,8 @@
 
     <span class="mat-subheading-1 tag-subheader">Pauses</span>
 
-
-    <div style="overflow: auto">
-      <mat-card *ngFor="let pause of currentDay?.pauses; let i = index" class="pause-card">
-        <mat-card-content fxLayout fxLayoutAlign="space-between center">
-
-          <span class="mat-body">{{ pause }} minutes</span>
-
-          <button mat-icon-button color="warn" (click)="onRemovePause(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-card-content>
-      </mat-card>
-    </div>
-
-    <mat-card>
-      <mat-card-content fxLayout fxLayoutAlign="space-between center">
-
-        <mat-slider fxFlex="auto" [(ngModel)]="pauseValue" min="0" max="90" step="5" thumbLabel tickInterval="2"></mat-slider>
-
-        <span class="mat-caption">{{ pauseValue }} min</span>
-
-        <button mat-icon-button color="primary" (click)="onAddPause()">
-          <mat-icon>add</mat-icon>
-        </button>
-      </mat-card-content>
-    </mat-card>
+    <app-pauses-box [day]="currentDay" [pauseValue]="pauseValue" (addPause)="onAddPause($event)" (removePause)="onRemovePause($event)">
+    </app-pauses-box>
 
   </div>
 

@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {DayData} from '../../models/day-data';
+import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
+import {DayData} from '../../models/day-data';
 import {AppState} from '../../store/app.state';
 import {selectAllData} from '../../store/data/data.state';
 import {Observable} from 'rxjs/Observable';
@@ -16,7 +17,7 @@ export class OverviewComponent implements OnInit {
 
   days$: Observable<DayData[]>;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private router: Router, private store: Store<AppState>) {}
 
   ngOnInit() {
     this.days$ = this.store.select(selectAllData);
@@ -30,7 +31,7 @@ export class OverviewComponent implements OnInit {
   }
 
   onEditDay(day: DayData) {
-    // TODO impl
+    this.router.navigate(['edit', day.id]);
   }
 
 }

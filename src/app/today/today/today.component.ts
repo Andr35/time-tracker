@@ -59,9 +59,9 @@ export class TodayComponent implements OnInit, OnDestroy {
     this.store.dispatch(new NewDay({startDate}));
   }
 
-  onAddPause() {
+  onAddPause(pause: number) {
     if (this.currentDay) {
-      this.currentDay.pauses.push(this.pauseValue);
+      this.currentDay.pauses.push(pause);
       this.store.dispatch(new EditDay({...this.currentDay}));
     }
   }

@@ -6,6 +6,7 @@ import {OverviewComponent} from './overview/overview/overview.component';
 import {SettingsComponent} from './settings/settings/settings.component';
 import {AuthComponent} from './auth/auth/auth.component';
 import {StatsComponent} from './stats/stats/stats.component';
+import {EditComponent} from './edit/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent
+  },
+  {
+    path: 'edit/:dayId',
+    component: EditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

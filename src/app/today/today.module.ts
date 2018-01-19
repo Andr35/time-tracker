@@ -2,12 +2,12 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
+import {SharedModule} from '../shared/shared.module';
+
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
-import {MatSliderModule} from '@angular/material/slider';
 
 import {TodayComponent} from './today/today.component';
 
@@ -16,12 +16,12 @@ import {TodayComponent} from './today/today.component';
     CommonModule,
     FormsModule,
 
+    SharedModule,
+
     FlexLayoutModule,
     MatButtonModule,
     MatInputModule,
-    MatCardModule,
-    MatIconModule,
-    MatSliderModule
+    MatIconModule
   ],
   declarations: [TodayComponent]
 })
