@@ -9,9 +9,9 @@
     <ng-container *ngFor="let items of days | monthGroup; let last = last">
 
 
-      <h3 matSubheader>{{items[0].startDate | date:'MMMM yyyy'}}</h3>
+      <h3 matSubheader>{{ items[0].startDate | date:'MMMM yyyy' }}</h3>
 
-      <app-day-details *ngFor="let day of items" [day]="day" (removeDay)="onRemoveDay($event)"></app-day-details>
+      <app-day-details *ngFor="let day of items" [day]="day"></app-day-details>
 
       <mat-divider *ngIf="!last"></mat-divider>
 

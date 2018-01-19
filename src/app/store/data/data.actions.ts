@@ -5,11 +5,9 @@ import {DayData} from '../../models/day-data';
 export const enum ActionTypes {
   LOAD_DAYS = '[Data] LOAD_DAYS',
   SET_DAYS = '[Data] SET_DAYS',
-  START_DAY = '[Data] START_DAY',
-  ADD_PAUSE = '[Data] ADD_PAUSE',
-  STOP_DAY = '[Data] STOP_DAY',
-  DELETE_DAY = '[Data] DELETE_DAY',
-  DELETE_PAUSE = '[Data] DELETE_PAUSE'
+  NEW_DAY = '[Data] NEW_DAY',
+  EDIT_DAY = '[Data] EDIT_DAY',
+  DELETE_DAY = '[Data] DELETE_DAY'
 }
 
 export class LoadDays implements Action {
@@ -22,41 +20,27 @@ export class SetDays implements Action {
   constructor(public payload: {days: DayData[]}) {}
 }
 
-export class StartDay implements Action {
-  readonly type = ActionTypes.START_DAY;
+export class NewDay implements Action {
+  readonly type = ActionTypes.NEW_DAY;
 
   constructor(public payload: {startDate: Date}) {}
 }
 
-export class AddPause implements Action {
-  readonly type = ActionTypes.ADD_PAUSE;
+export class EditDay implements Action {
+  readonly type = ActionTypes.EDIT_DAY;
 
-  constructor(public payload: {id: number; pause: number}) {}
-}
-
-export class StopDay implements Action {
-  readonly type = ActionTypes.STOP_DAY;
-
-  constructor(public payload: {id: number; stopDate: Date}) {}
+  constructor(public payload: DayData) {}
 }
 
 export class DeleteDay implements Action {
   readonly type = ActionTypes.DELETE_DAY;
 
-  constructor(public payload: {id: number}) {}
-}
-
-export class DeletePause implements Action {
-  readonly type = ActionTypes.DELETE_PAUSE;
-
-  constructor(public payload: {id: number; index: number}) {}
+  constructor(public payload: {id: string}) {}
 }
 
 export type All
   = SetDays
   | LoadDays
-  | StartDay
-  | AddPause
-  | StopDay
+  | NewDay
   | DeleteDay
-  | DeletePause;
+  | EditDay;

@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
-import {ActionTypes, SetDays, StartDay, AddPause, StopDay, DeleteDay, DeletePause} from './data.actions';
+import {ActionTypes, SetDays, NewDay, DeleteDay, EditDay} from './data.actions';
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {selectUser} from '../common/common.state';
 
 import {map} from 'rxjs/operators/map';
 import {tap} from 'rxjs/operators/tap';
-import {first} from 'rxjs/operators/first';
 import {switchMap} from 'rxjs/operators/switchMap';
 import {withLatestFrom} from 'rxjs/operators/withLatestFrom';
 import {DayData} from '../../models/day-data';
@@ -23,38 +22,25 @@ export class DataEffects {
     withLatestFrom(this.store.select(selectUser)),
     map(([action, user]) => (user || {uid: ''}).uid),
     switchMap(uid => this.getCollection(uid).valueChanges().pipe(
-      map(days => new SetDays({days}))
+      map(days => new SetDays({days})),
     ))
   );
 
   @Effect({dispatch: false})
-  startDay$ = this.actions$.ofType<StartDay>(ActionTypes.START_DAY).pipe(
+  newDay$ = this.actions$.ofType<NewDay>(ActionTypes.NEW_DAY).pipe(
     withLatestFrom(this.store.select(selectUser)),
     map(([action, user]) => ({startDate: action.payload.startDate, uid: (user || {uid: ''}).uid})),
     tap(({startDate, uid}) => {
-      this.getCollection(uid).doc(`${startDate.getTime()}`).set({startDate, pauses: []});
+      this.getCollection(uid).doc<DayData>(`${startDate.getTime()}`).set({id: `${startDate.getTime()}`, startDate, pauses: []});
     })
   );
 
   @Effect({dispatch: false})
-  addPause$ = this.actions$.ofType<AddPause>(ActionTypes.ADD_PAUSE).pipe(
+  editDay$ = this.actions$.ofType<EditDay>(ActionTypes.EDIT_DAY).pipe(
     withLatestFrom(this.store.select(selectUser)),
-    map(([action, user]) => ({id: action.payload.id, pause: action.payload.pause, uid: (user || {uid: ''}).uid})),
-    tap(({id, pause, uid}) => {
-      // TODO better
-      // TODO works?
-      this.getCollection(uid).doc<DayData>(`${id}`).valueChanges().pipe(first()).subscribe(doc => {
-        this.getCollection(uid).doc<DayData>(`${id}`).update({pauses: [...doc.pauses, pause]});
-      });
-    })
-  );
-
-  @Effect({dispatch: false})
-  stopDay$ = this.actions$.ofType<StopDay>(ActionTypes.STOP_DAY).pipe(
-    withLatestFrom(this.store.select(selectUser)),
-    map(([action, user]) => ({id: action.payload.id, stopDate: action.payload.stopDate, uid: (user || {uid: ''}).uid})),
-    tap(({id, stopDate, uid}) => {
-      this.getCollection(uid).doc<DayData>(`${id}`).update({stopDate});
+    map(([action, user]) => ({day: action.payload, uid: (user || {uid: ''}).uid})),
+    tap(({day, uid}) => {
+      this.getCollection(uid).doc<DayData>(day.id).update(day);
     })
   );
 
@@ -63,20 +49,7 @@ export class DataEffects {
     withLatestFrom(this.store.select(selectUser)),
     map(([action, user]) => ({id: action.payload.id, uid: (user || {uid: ''}).uid})),
     tap(({id, uid}) => {
-      this.getCollection(uid).doc<DayData>(`${id}`).delete();
-    })
-  );
-
-  @Effect({dispatch: false})
-  deletePause$ = this.actions$.ofType<DeletePause>(ActionTypes.DELETE_PAUSE).pipe(
-    withLatestFrom(this.store.select(selectUser)),
-    map(([action, user]) => ({id: action.payload.id, index: action.payload.index, uid: (user || {uid: ''}).uid})),
-    tap(({id, index, uid}) => {
-      // TODO better
-      // TODO works?
-      this.getCollection(uid).doc<DayData>(`${id}`).valueChanges().pipe(first()).subscribe(doc => {
-        this.getCollection(uid).doc<DayData>(`${id}`).update({pauses: doc.pauses.filter((p, i) => i !== index)});
-      });
+      this.getCollection(uid).doc<DayData>(id).delete();
     })
   );
 

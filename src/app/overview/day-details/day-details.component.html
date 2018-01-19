@@ -3,10 +3,10 @@
   <mat-expansion-panel-header>
 
     <mat-panel-title>
-      {{day?.startDate | date:'dd MMMM'}}
+      {{ day?.startDate | date:'dd MMMM' }}
     </mat-panel-title>
     <mat-panel-description>
-      {{calcSpan() | date:'HH:mm':'+0'}}
+      {{ calcSpan() | date:'HH:mm':'+0' }}
     </mat-panel-description>
 
   </mat-expansion-panel-header>
@@ -20,7 +20,7 @@
         <circle cx="16" cy="16" r="8" class="point-start"></circle>
       </svg>
 
-      <span class="mat-body text-bolder" fxFlexOffset="12px">{{day?.startDate | date:'HH:mm'}}</span>
+      <span class="mat-body text-bolder" fxFlexOffset="12px">{{ day?.startDate | date:'HH:mm' }}</span>
     </div>
 
     <div *ngFor="let pause of day?.pauses" fxLayout fxLayoutAlign="start center">
@@ -30,7 +30,7 @@
         <circle cx="16" cy="16" r="6" class="point-pause"></circle>
       </svg>
 
-      <span class="mat-body" fxFlexOffset="12px">{{pause}} minutes</span>
+      <span class="mat-body" fxFlexOffset="12px">{{ pause }} minutes</span>
     </div>
 
     <div fxLayout fxLayoutAlign="start center">
@@ -40,13 +40,16 @@
         <circle cx="16" cy="16" r="8" class="point-stop"></circle>
       </svg>
 
-      <span class="mat-body text-bolder" fxFlexOffset="12px">{{day?.stopDate | date:'HH:mm'}}</span>
+      <span class="mat-body text-bolder" fxFlexOffset="12px">{{ day?.stopDate | date:'HH:mm' }}</span>
     </div>
   </div>
 
 
   <mat-action-row>
-    <button mat-icon-button color="warn" (click)="removeDay.emit(day)">
+    <button mat-icon-button color="primary" (click)="onEdit()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="onDelete()">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-action-row>

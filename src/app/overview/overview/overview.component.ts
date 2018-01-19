@@ -23,6 +23,14 @@ export class OverviewComponent implements OnInit {
   }
 
   onRemoveDay(day: DayData) {
-    this.store.dispatch(new DeleteDay({id: day.startDate.getTime()}));
+    const sure = confirm(`Delete day ${day.startDate.getDate()}/${day.startDate.getMonth() + 1}/${day.startDate.getFullYear()}?`);
+    if (sure) {
+      this.store.dispatch(new DeleteDay({id: day.id}));
+    }
   }
+
+  onEditDay(day: DayData) {
+    // TODO impl
+  }
+
 }

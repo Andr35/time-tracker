@@ -22,14 +22,16 @@
       <mat-list>
         <mat-list-item>
           <h4 matLine>Avg hours per day</h4>
-          <span class="mat-body" color="primary">{{avgHours | date:'HH:mm':'+0'}}</span>
+          <span class="mat-body" color="primary">{{ avgHours | date:'HH:mm':'+0' }}</span>
         </mat-list-item>
       </mat-list>
     </div>
 
     <div fxLayout="column" fxFlex="auto">
       <span class="mat-title">Stats</span>
-      <canvas #statchart></canvas>
+      <div fxFlex="auto">
+        <canvas #statchart></canvas>
+      </div>
     </div>
 
   </div>

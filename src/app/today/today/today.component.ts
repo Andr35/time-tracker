@@ -1,11 +1,11 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
-import {Store} from '@ngrx/store';
 import {style, trigger, state, transition, animate} from '@angular/animations';
+import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app.state';
 import {Subscription} from 'rxjs/Subscription';
 import {selectAllData} from '../../store/data/data.state';
 import {DayData} from '../../models/day-data';
-import {StartDay, StopDay, DeletePause, AddPause} from '../../store/data/data.actions';
+import {NewDay, EditDay} from '../../store/data/data.actions';
 import {map} from 'rxjs/operators/map';
 
 @Component({
@@ -56,19 +56,27 @@ export class TodayComponent implements OnInit, OnDestroy {
     startDate.setHours(this.startHours);
     startDate.setMinutes(this.startMinutes);
 
-    this.store.dispatch(new StartDay({startDate}));
+    this.store.dispatch(new NewDay({startDate}));
   }
 
   onAddPause() {
-    this.store.dispatch(new AddPause({id: this.getCurrentDayId(), pause: this.pauseValue}));
+    if (this.currentDay) {
+      this.currentDay.pauses.push(this.pauseValue);
+      this.store.dispatch(new EditDay({...this.currentDay}));
+    }
   }
 
   onRemovePause(index: number) {
-    this.store.dispatch(new DeletePause({id: this.getCurrentDayId(), index}));
+    if (this.currentDay) {
+      const pauses = this.currentDay.pauses.filter(i => i !== index);
+      this.store.dispatch(new EditDay({...this.currentDay, pauses}));
+    }
   }
 
   onStop() {
-    this.store.dispatch(new StopDay({id: this.getCurrentDayId(), stopDate: new Date()}));
+    if (this.currentDay) {
+      this.store.dispatch(new EditDay({...this.currentDay, stopDate: new Date()}));
+    }
   }
 
   toggleRecPause() {
@@ -81,15 +89,6 @@ export class TodayComponent implements OnInit, OnDestroy {
       localStorage.removeItem(this.REC_PAUSE_KEY);
     }
   }
-
-
-  private getCurrentDayId(): number {
-    if (!this.currentDay) {
-      throw new Error('Missing current day');
-    }
-    return this.currentDay.startDate.getTime();
-  }
-
 
   ngOnDestroy() {
     this.subscr.unsubscribe();

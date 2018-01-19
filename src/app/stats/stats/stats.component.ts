@@ -83,6 +83,7 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         legend: {display: false},
         scales: {
           yAxes: [{

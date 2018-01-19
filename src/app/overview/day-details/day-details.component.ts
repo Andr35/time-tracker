@@ -1,5 +1,6 @@
-import {Component, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
+import {Component, ChangeDetectionStrategy, Input, Optional} from '@angular/core';
 import {DayData} from '../../models/day-data';
+import {OverviewComponent} from '../overview/overview.component';
 
 @Component({
   selector: 'app-day-details',
@@ -7,13 +8,24 @@ import {DayData} from '../../models/day-data';
   styleUrls: ['./day-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DayDetailsComponent{
+export class DayDetailsComponent {
 
   @Input()
   day: DayData;
 
-  @Output()
-  removeDay: EventEmitter<DayData> = new EventEmitter();
+  constructor( @Optional() private parent: OverviewComponent) {}
+
+  onEdit() {
+    if (this.parent) {
+      this.parent.onEditDay(this.day);
+    }
+  }
+
+  onDelete() {
+    if (this.parent) {
+      this.parent.onRemoveDay(this.day);
+    }
+  }
 
   calcSpan(): Date | null {
     if (!this.day || !this.day.stopDate) {
