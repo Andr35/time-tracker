@@ -82,6 +82,10 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
         }]
       },
       options: {
+        animation: {
+          duration: 300,
+          easing: 'easeInOutQuart'
+        },
         responsive: true,
         maintainAspectRatio: false,
         legend: {display: false},

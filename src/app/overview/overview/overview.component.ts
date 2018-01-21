@@ -1,4 +1,5 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {trigger, transition, style, animate, query, stagger} from '@angular/animations';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {DayData} from '../../models/day-data';
@@ -11,7 +12,20 @@ import {DeleteDay} from '../../store/data/data.actions';
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fromDown', [
+      transition('void => *', [
+        query('.day', style({transform: 'translateY(100vh)', opacity: 0})),
+        query('.day', stagger('100ms', [
+          style({transform: 'translateY(100vh)', opacity: 0}),
+          animate('500ms ease-in')
+        ])),
+      ]),
+      transition('* => void', [style({transform: 'translateY(100%)'}), animate('2s ease-out')]),
+    ])
+  ]
+
 })
 export class OverviewComponent implements OnInit {
 

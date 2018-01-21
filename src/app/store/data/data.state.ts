@@ -6,8 +6,8 @@ export interface DataState extends EntityState<DayData> {
   last: DayData | null;
 }
 
-export function selectId(data: DayData): number {
-  return data.startDate.getTime();
+export function selectId(data: DayData): string {
+  return data.id;
 }
 
 export const dataAdapter: EntityAdapter<DayData> = createEntityAdapter<DayData>({selectId});

@@ -29,9 +29,9 @@ export class DataEffects {
   @Effect({dispatch: false})
   newDay$ = this.actions$.ofType<NewDay>(ActionTypes.NEW_DAY).pipe(
     withLatestFrom(this.store.select(selectUser)),
-    map(([action, user]) => ({startDate: action.payload.startDate, uid: (user || {uid: ''}).uid})),
-    tap(({startDate, uid}) => {
-      this.getCollection(uid).doc<DayData>(`${startDate.getTime()}`).set({id: `${startDate.getTime()}`, startDate, pauses: []});
+    map(([action, user]) => ({day: action.payload, uid: (user || {uid: ''}).uid})),
+    tap(({day, uid}) => {
+      this.getCollection(uid).doc<DayData>(day.id).set(day);
     })
   );
 

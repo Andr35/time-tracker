@@ -1,5 +1,6 @@
 <div fxLayout="column" fxFlex="auto">
 
+  <!-- TITLE BAR -->
   <div fxLayout="row">
     <button mat-icon-button (click)="onCancel()">
       <mat-icon>arrow_back</mat-icon>
@@ -12,7 +13,51 @@
     </button>
   </div>
 
+  <!-- START -->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="24px">
+    <span class="mat-subheading-1 tag-subheader">Start time</span>
+    <!-- <span class="mat-title">{{ day?.startDate | date:'HH:mm' }}</span> -->
 
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-form-field>
+        <input matInput type="number" [ngModel]="day?.startDate.getHours()" (ngModelChange)="onDateChange('start', 'h', $event)"
+          step="1" min="0" max="23">
+      </mat-form-field>
+
+      <span class="mat-body field-space">:</span>
+
+      <mat-form-field>
+        <input matInput type="number" [ngModel]="day?.startDate.getMinutes()" (ngModelChange)="onDateChange('start', 'm', $event)"
+          min="0" max="59">
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <!-- STOP -->
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="24px">
+    <span class="mat-subheading-1 tag-subheader">Stop time</span>
+    <!-- <span class="mat-title">{{ day?.stopDate | date:'HH:mm' }}</span> -->
+
+
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-form-field>
+        <input matInput type="number" [ngModel]="day?.stopDate?.getHours()" (ngModelChange)="onDateChange('stop', 'h', $event)" step="1"
+          min="0" max="23">
+      </mat-form-field>
+
+      <span class="mat-body field-space">:</span>
+
+      <mat-form-field>
+        <input matInput type="number" [ngModel]="day?.stopDate?.getMinutes()" (ngModelChange)="onDateChange('stop', 'm', $event)"
+          min="0" max="59">
+      </mat-form-field>
+    </div>
+
+  </div>
+
+
+  <!-- PAUSES -->
   <div fxFlex="auto" fxLayout="column">
 
     <span class="mat-subheading-1 tag-subheader">Pauses</span>
@@ -23,24 +68,16 @@
   </div>
 
 
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="36px">
-    <span class="mat-subheading-1 tag-subheader">Stop time</span>
-    <span class="mat-title">{{ day?.stopDate | date:'HH:mm' }}</span>
+  <!-- BUTTONS -->
+  <div fxLayout="row" fxLayoutAlign="center center">
+
+    <button mat-fab color="warn" (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button mat-fab color="primary" (click)="onConfirm()" fxFlexOffset="24px">
+      <mat-icon>check</mat-icon>
+    </button>
+
   </div>
-
-</div>
-
-
-<div fxLayout="row" fxLayoutAlign="center center">
-
-  <button mat-fab color="warn" (click)="onCancel()">
-    <mat-icon>close</mat-icon>
-  </button>
-
-  <button mat-fab color="primary" (click)="onConfirm()" fxFlexOffset="24px">
-    <mat-icon>check</mat-icon>
-  </button>
-
-</div>
-
 </div>

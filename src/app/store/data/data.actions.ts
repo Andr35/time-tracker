@@ -23,7 +23,7 @@ export class SetDays implements Action {
 export class NewDay implements Action {
   readonly type = ActionTypes.NEW_DAY;
 
-  constructor(public payload: {startDate: Date}) {}
+  constructor(public payload: DayData) {}
 }
 
 export class EditDay implements Action {

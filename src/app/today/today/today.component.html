@@ -22,7 +22,7 @@
 <!-- START TEMPLATE -->
 <ng-template #startTmpl>
 
-  <div fxFlex="auto" fxFlexAlign="center" fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="auto" fxFlexAlign="center" fxLayout="row" fxLayoutAlign="space-around center" @appear>
     <mat-form-field>
       <input matInput type="number" [(ngModel)]="startHours" step="1" min="0" max="23">
     </mat-form-field>
@@ -35,7 +35,7 @@
   </div>
 
   <div class="actions" fxLayout fxLayoutAlign="center center">
-    <button mat-fab class="play-btn" (click)="onStart()">
+    <button mat-fab class="play-btn" (click)="onStart()" @fromDown>
       <mat-icon>play_arrow</mat-icon>
     </button>
   </div>
@@ -46,7 +46,7 @@
 <!-- STOP TEMPLATE -->
 <ng-template #stopTmpl>
 
-  <div fxFlexAlign="center">
+  <div fxFlexAlign="center" @appear>
     <span class="mat-title">{{ currentDay?.startDate | date:'dd MMMM yyyy' }}</span>
   </div>
 
@@ -65,7 +65,7 @@
   </div>
 
 
-  <div class="actions" fxLayout fxLayoutAlign="center center">
+  <div class="actions" fxLayout fxLayoutAlign="center center" @fromDown>
 
     <button mat-mini-fab *ngIf="!recPauseDate" color="accent" (click)="toggleRecPause()" [@enterLeave]="'in'">
       <mat-icon>pause</mat-icon>

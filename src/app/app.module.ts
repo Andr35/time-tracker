@@ -28,18 +28,25 @@ import {AuthGuard} from './auth.guard';
 
 import * as Raven from 'raven-js';
 
-Raven
-  .config(environment.sentry_dsn, {
-    release: '1.0.0',
-    environment: environment.production ? 'development' : 'production'
-  })
-  .install();
+Raven.config(environment.sentry_dsn, {
+  release: '1.0.0',
+  environment: environment.production ? 'development' : 'production'
+});
+
+if (environment.production) {
+  Raven.install();
+}
 
 export class RavenErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     console.log(err);
     Raven.captureException(err);
     Raven.showReportDialog();
+  }
+}
+export class SimpleErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    console.log(err);
   }
 }
 

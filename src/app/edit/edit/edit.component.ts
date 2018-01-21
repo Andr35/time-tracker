@@ -1,14 +1,15 @@
 import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
-import {map} from 'rxjs/operators/map';
-import {DayData} from '../../models/day-data';
 import {Store} from '@ngrx/store';
+import {map} from 'rxjs/operators/map';
+import {coerceNumberProperty} from '@angular/cdk/coercion';
+import {DayData, DayDataUtils} from '../../models/day-data';
 import {AppState} from '../../store/app.state';
 import {selectDataEntities} from '../../store/data/data.state';
 import {switchMap} from 'rxjs/operators/switchMap';
 import {Subscription} from 'rxjs/Subscription';
-import {DeleteDay} from '../../store/data/data.actions';
+import {DeleteDay, EditDay} from '../../store/data/data.actions';
 
 @Component({
   selector: 'app-edit',
@@ -42,7 +43,10 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   onConfirm() {
-    // TODO
+    if (this.day) {
+      this.store.dispatch(new EditDay(this.day));
+      this.location.back();
+    }
   }
 
   onDelete() {
@@ -52,16 +56,46 @@ export class EditComponent implements OnInit, OnDestroy {
       );
       if (sure) {
         this.store.dispatch(new DeleteDay({id: this.day.id}));
+        this.location.back();
       }
     }
   }
 
-  onAddPause() {
-    // TODO (create CLASS DayData)
+
+  onDateChange(type: 'start' | 'stop', time: 'h' | 'm', value: string) {
+    const v = coerceNumberProperty(value);
+
+    if (this.day) {
+
+      if (type === 'start') {
+        const start = new Date(this.day.startDate);
+        time === 'h' ? (start.setHours(v)) : (start.setMinutes(v));
+
+        this.day = DayDataUtils.start(this.day, start);
+
+      } else if (type === 'stop') {
+
+        if (this.day.stopDate) {
+          const stop = new Date(this.day.stopDate);
+          time === 'h' ? (stop.setHours(v)) : (stop.setMinutes(v));
+
+          this.day = DayDataUtils.stop(this.day, stop);
+        }
+
+      }
+    }
   }
 
-  onRemovePause() {
-    // TODO
+  onAddPause(pause: number) {
+    if (this.day) {
+      this.day = DayDataUtils.addPause(this.day, pause);
+    }
+  }
+
+  onRemovePause(index: number) {
+    if (this.day) {
+      this.day = DayDataUtils.removePause(this.day, index);
+    }
   }
 
   ngOnDestroy() {

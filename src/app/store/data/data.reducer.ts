@@ -14,7 +14,7 @@ export function dataReducer(state: DataState = initialState, action: All): DataS
     }
 
     case ActionTypes.NEW_DAY:
-      return dataAdapter.addOne({id: `${action.payload.startDate.getTime()}`, startDate: action.payload.startDate, pauses: []}, state);
+      return dataAdapter.addOne(action.payload, state);
 
     case ActionTypes.EDIT_DAY: {
       return dataAdapter.updateOne({id: action.payload.id, changes: action.payload}, state);

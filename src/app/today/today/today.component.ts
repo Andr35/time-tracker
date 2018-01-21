@@ -4,7 +4,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app.state';
 import {Subscription} from 'rxjs/Subscription';
 import {selectAllData} from '../../store/data/data.state';
-import {DayData} from '../../models/day-data';
+import {DayData, DayDataUtils} from '../../models/day-data';
 import {NewDay, EditDay} from '../../store/data/data.actions';
 import {map} from 'rxjs/operators/map';
 
@@ -18,6 +18,13 @@ import {map} from 'rxjs/operators/map';
       state('in', style({opacity: 1})),
       transition('void => *', [style({opacity: 0}), animate(300)]),
       transition('* => void', [animate(300, style({opacity: 0}))])
+    ]),
+    trigger('fromDown', [
+      transition('void => *', [style({transform: 'translateY(100%)'}), animate('300ms ease-out')]),
+      transition('* => void', [style({transform: 'translateY(100%)'}), animate('300ms ease-out')]),
+    ]),
+    trigger('appear', [
+      transition('void => *', [style({opacity: 0, transform: 'scale(0.5)'}), animate('300ms ease-in')]),
     ])
   ]
 })
@@ -56,26 +63,24 @@ export class TodayComponent implements OnInit, OnDestroy {
     startDate.setHours(this.startHours);
     startDate.setMinutes(this.startMinutes);
 
-    this.store.dispatch(new NewDay({startDate}));
+    this.store.dispatch(new NewDay(DayDataUtils.create(startDate)));
   }
 
   onAddPause(pause: number) {
     if (this.currentDay) {
-      this.currentDay.pauses.push(pause);
-      this.store.dispatch(new EditDay({...this.currentDay}));
+      this.store.dispatch(new EditDay(DayDataUtils.addPause(this.currentDay, pause)));
     }
   }
 
   onRemovePause(index: number) {
     if (this.currentDay) {
-      const pauses = this.currentDay.pauses.filter(i => i !== index);
-      this.store.dispatch(new EditDay({...this.currentDay, pauses}));
+      this.store.dispatch(new EditDay(DayDataUtils.removePause(this.currentDay, index)));
     }
   }
 
   onStop() {
     if (this.currentDay) {
-      this.store.dispatch(new EditDay({...this.currentDay, stopDate: new Date()}));
+      this.store.dispatch(new EditDay(DayDataUtils.stop(this.currentDay, new Date())));
     }
   }
 
