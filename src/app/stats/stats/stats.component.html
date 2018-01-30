@@ -30,7 +30,10 @@
     <div fxLayout="column" fxFlex="auto">
       <span class="mat-title">Stats</span>
       <div fxFlex="auto">
-        <canvas #statchart></canvas>
+        <svg class="chart" #statchart [attr.viewBox]="'0 0 ' + chartWidth + ' ' + chartHeight" preserveAspectRatio="xMidYMid meet">
+
+        </svg>
+        <!-- <canvas #statchart></canvas> -->
       </div>
     </div>
 
