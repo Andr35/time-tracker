@@ -11,7 +11,8 @@
 
       <h3 matSubheader>{{ items[0].startDate | date:'MMMM yyyy' }}</h3>
 
-      <div [@fromDown]="items.length">
+      <!-- <div [@fromDown]="items.length"> -->
+      <div>
         <div class="day" *ngFor="let day of items">
           <app-day-details [day]="day"></app-day-details>
         </div>
