@@ -22,6 +22,8 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
   @ViewChild('statchart')
   chartElem: ElementRef;
 
+  private readonly AXIS_PADDING = 20;
+
   endDate: Date;
   startDate: Date;
 
@@ -67,23 +69,42 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
         const svg = d3.select(this.chartElem.nativeElement);
 
         // Update scale
-        this.chartXScale.domain([0, 10]); // TODO
-        this.chartYScale.domain([10, 0]);
+        this.chartXScale.domain([0, chartData.length]); // TODO impl
+        this.chartYScale.domain([Math.max(...chartData.map(v => v.y)), 0]); // TODO impl
 
         // Define line
-        const lineGen = d3.line<{x: number, y: number}>()
+        const lineGen = d3.area<{x: number, y: number}>()
           .x(d => this.chartXScale(d.x))
-          .y(d => this.chartYScale(d.y));
+          .y(this.chartHeight - this.AXIS_PADDING * 2).y1(d => this.chartYScale(d.y));
 
+        svg.select('.area').remove();
+        svg.select('.dots').remove();
         svg
           // .select('path')
           .append('path')
+          .attr('class', `area`)
+          .attr('transform', `translate(${this.AXIS_PADDING}, 0)`)
           .attr('fill', 'rgba(33, 149, 243, 0.205)')
           .attr('stroke', '#2196F3')
           .attr('stroke-width', '5px')
           .datum(chartData)
           .attr('d', lineGen);
 
+        // Add the scatterplot
+        svg
+          .selectAll('.dots')
+          // .append('g')
+          // .attr('class', 'dots')
+          .data(chartData)
+          .enter()
+          .append('circle')
+          .attr('transform', `translate(${this.AXIS_PADDING}, 0)`)
+          .attr('r', 25)
+          .style('fill', '#FFD600')
+          .attr('stroke', '#FBC02D')
+          .attr('stroke-width', '8px')
+          .attr('cx', d => this.chartXScale(d.x))
+          .attr('cy', d => this.chartYScale(d.y));
 
         // svg.transition(); // TODO update axis
 
@@ -94,7 +115,6 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
 
 
   initChart() {
-    const axisPadding = 20;
     const margin = 20;
 
     // Get the svg box
@@ -108,13 +128,13 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
     const yAxis = d3.axisLeft(this.chartYScale);
 
     svg.append('g')
-      .attr('transform', `translate(0, ${this.chartHeight - axisPadding})`)
-      .style('font-size', '16')
+      .attr('transform', `translate(0, ${this.chartHeight - this.AXIS_PADDING * 2})`)
+      .style('font-size', '34px')
       .call(xAxis);
 
     svg.append('g')
-      .attr('transform', `translate(${axisPadding}, 0)`)
-      .style('font-size', '16')
+      .attr('transform', `translate(${this.AXIS_PADDING * 2}, 0)`)
+      .style('font-size', '34px')
       .call(yAxis);
 
   }

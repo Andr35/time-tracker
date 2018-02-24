@@ -14,8 +14,10 @@
   </div>
 
   <!-- START -->
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="24px">
-    <span class="mat-subheading-1 tag-subheader">Start time</span>
+  <div class="time-box" fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="24px">
+    <div class="mat-subheading-1 tag-subheader">
+      <span>Start time</span>
+    </div>
     <!-- <span class="mat-title">{{ day?.startDate | date:'HH:mm' }}</span> -->
 
     <div fxLayout="row" fxLayoutAlign="space-around center">
@@ -35,8 +37,10 @@
   </div>
 
   <!-- STOP -->
-  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="24px">
-    <span class="mat-subheading-1 tag-subheader">Stop time</span>
+  <div class="time-box" fxLayout="row" fxLayoutAlign="space-between center" fxFlexOffset="24px">
+    <div class="mat-subheading-1 tag-subheader">
+      <span>Stop time</span>
+    </div>
     <!-- <span class="mat-title">{{ day?.stopDate | date:'HH:mm' }}</span> -->
 
 
@@ -58,7 +62,7 @@
 
 
   <!-- PAUSES -->
-  <div fxFlex="auto" fxLayout="column">
+  <div fxFlex="auto" fxLayout="column" style="overflow-y: auto">
 
     <span class="mat-subheading-1 tag-subheader">Pauses</span>
 
@@ -69,7 +73,7 @@
 
 
   <!-- BUTTONS -->
-  <div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutAlign="center center" class="action-bar">
 
     <button mat-fab color="warn" (click)="onCancel()">
       <mat-icon>close</mat-icon>

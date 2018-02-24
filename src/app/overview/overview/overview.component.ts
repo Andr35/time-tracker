@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import {trigger, transition, style, animate, query, stagger} from '@angular/animations';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';

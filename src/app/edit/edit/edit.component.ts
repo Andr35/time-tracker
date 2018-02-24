@@ -75,6 +75,10 @@ export class EditComponent implements OnInit, OnDestroy {
 
       } else if (type === 'stop') {
 
+        if (!this.day.stopDate) {
+          this.day = DayDataUtils.stop(this.day, this.day.startDate);
+        }
+
         if (this.day.stopDate) {
           const stop = new Date(this.day.stopDate);
           time === 'h' ? (stop.setHours(v)) : (stop.setMinutes(v));
