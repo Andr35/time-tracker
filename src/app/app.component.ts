@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
       this.swUpdate.checkForUpdate();
 
       this.swUpdate.available.subscribe(() => {
+        this.swUpdate.activateUpdate().then(() => document.location.reload());
         console.log(
           '%c A new version of the app is available. Reload the page to get it 🚀🚀🚀',
           'background: #eee; color: #2196F3; border: 1px solid #1565C0; font-size: 16px'

@@ -1,13 +1,11 @@
 {
-  "lang": "en",
-  "scope": "/",
-  "start_url": "/",
-  "name": "Time Tracker",
-  "display": "standalone",
   "short_name": "Time Tracker",
-  "description": "Time tracker",
+  "name": "Time Tracker",
+  "start_url": "/",
   "theme_color": "#1976D2",
   "background_color": "#1976D2",
+  "display": "standalone",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/favicon.ico",
