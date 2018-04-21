@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {selectAllData} from '../../store/data/data.state';
 import {DayData, DayDataUtils} from '../../models/day-data';
 import {NewDay, EditDay} from '../../store/data/data.actions';
-import {map} from 'rxjs/operators/map';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-today',

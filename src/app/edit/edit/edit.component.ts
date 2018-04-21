@@ -2,12 +2,12 @@ import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Store} from '@ngrx/store';
-import {map} from 'rxjs/operators/map';
+import {map} from 'rxjs/operators';
 import {coerceNumberProperty} from '@angular/cdk/coercion';
 import {DayData, DayDataUtils} from '../../models/day-data';
 import {AppState} from '../../store/app.state';
 import {selectDataEntities} from '../../store/data/data.state';
-import {switchMap} from 'rxjs/operators/switchMap';
+import {switchMap} from 'rxjs/operators';
 import {Subscription} from 'rxjs/Subscription';
 import {DeleteDay, EditDay} from '../../store/data/data.actions';
 
