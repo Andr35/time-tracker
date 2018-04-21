@@ -7,3 +7,12 @@ main {
 nav ::ng-deep mat-ink-bar {
     top: 0;
 }
+
+nav ::ng-deep .mat-tab-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ::ng-deep .mat-tab-links > *{
+  flex: 1 1 100%;
+}
