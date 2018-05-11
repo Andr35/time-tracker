@@ -73,7 +73,8 @@ export class SimpleErrorHandler implements ErrorHandler {
     // Style
     FlexLayoutModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [
     AppComponent

@@ -3,10 +3,8 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {AppState} from '../../store/app.state';
 import {Store} from '@ngrx/store';
 import {selectAllData} from '../../store/data/data.state';
-import {Subscription} from 'rxjs/Subscription';
-import {combineLatest} from 'rxjs/observable/combineLatest';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {map} from 'rxjs/operators/map';
+import {Subscription, combineLatest, BehaviorSubject} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {DayData} from '../../models/day-data';
 
 import * as d3 from 'd3';

@@ -2,11 +2,11 @@ import {Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef
 import {style, trigger, state, transition, animate} from '@angular/animations';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../store/app.state';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {selectAllData} from '../../store/data/data.state';
 import {DayData, DayDataUtils} from '../../models/day-data';
 import {NewDay, EditDay} from '../../store/data/data.actions';
-import {map} from 'rxjs/operators/map';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-today',

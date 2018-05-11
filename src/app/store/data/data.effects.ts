@@ -6,10 +6,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {selectUser} from '../common/common.state';
 
-import {map} from 'rxjs/operators/map';
-import {tap} from 'rxjs/operators/tap';
-import {switchMap} from 'rxjs/operators/switchMap';
-import {withLatestFrom} from 'rxjs/operators/withLatestFrom';
+import {map, tap, switchMap, withLatestFrom} from 'rxjs/operators';
 import {DayData} from '../../models/day-data';
 
 @Injectable()

@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import {map} from 'rxjs/operators/map';
-import {tap} from 'rxjs/operators/tap';
+import {Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import {AppState} from './store/app.state';
 import {selectUser} from './store/common/common.state';

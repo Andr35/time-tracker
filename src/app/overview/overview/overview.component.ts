@@ -5,7 +5,7 @@ import {Store} from '@ngrx/store';
 import {DayData} from '../../models/day-data';
 import {AppState} from '../../store/app.state';
 import {selectAllData} from '../../store/data/data.state';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {DeleteDay} from '../../store/data/data.actions';
 
 @Component({
